@@ -1,3 +1,5 @@
+import domain.Locomotive;
+import domain.Train;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -228,10 +230,11 @@ public class Main extends javax.swing.JFrame implements ActionListener
     {
         if (event.getSource()== btnNewTrain)
         {
-            String train = tfNewTrain.getText();
-            if (train != null && train.trim().length()>0)
+            Train train = new Train(tfNewTrain.getText());
+            System.out.println(train.getName());
+            if (train.getName() != null && train.getName().trim().length()>0)
             {
-                train = addTrain(train);
+                addTrain(train);
                 currentTrain = cbAllTrains.getSelectedIndex();
                 drawTrain(train);
             }
@@ -307,12 +310,12 @@ public class Main extends javax.swing.JFrame implements ActionListener
         }
     }
 
-    public String addTrain(String train)
+    public String addTrain(Train train)
     {
         String t = "";
         try
         {
-            t = train.trim();
+            t = train.getName().trim();
             for (int i = 0; i < cbAllTrains.getItemCount();i++ )
             {
                 String cbTrain = (String)cbAllTrains.getItemAt(i);
@@ -340,20 +343,14 @@ public class Main extends javax.swing.JFrame implements ActionListener
 
     }
 
-    public void drawTrain(String train)
+    public void drawTrain(Train train)
     {
-        if (train != "")
+        if (train != null)
         {
             Graphics g = drawPanel.getGraphics();
-            g.setColor(Color.LIGHT_GRAY);
-            g.fillRect(30,80+currentTrain*OFFSET,80,40);
-            g.fillRect(80,60+currentTrain*OFFSET,30,30);
-            g.drawRoundRect(85, 40+currentTrain*OFFSET, 20, 20, 20, 20);
-            g.drawRoundRect(85, currentTrain*OFFSET, 40, 40, 40, 40);
-            g.setColor(Color.BLACK);
-            g.fillRoundRect(35, 120+currentTrain*OFFSET, 20, 20, 20, 20);
-            g.fillRoundRect(80, 120+currentTrain*OFFSET, 20, 20, 20, 20);
-            g.drawString(train,40,105+currentTrain*OFFSET);
+            Locomotive locomotive = new Locomotive(train);
+            locomotive.drawComponent(g, currentTrain, OFFSET);
+
         }
     }
 

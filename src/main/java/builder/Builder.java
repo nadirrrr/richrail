@@ -1,4 +1,5 @@
 package builder;
 
-public class Builder {
+interface Builder {
+
 }
