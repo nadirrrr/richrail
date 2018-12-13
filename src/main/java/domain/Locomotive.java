@@ -7,6 +7,7 @@ public class Locomotive implements RollingComponent {
 
     private Train train;
 
+
     public Locomotive(Train train) {
 
         this.train = train;

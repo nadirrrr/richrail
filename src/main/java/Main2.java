@@ -1,29 +1,12 @@
 import domain.Locomotive;
 import domain.Train;
 
-
-import java.awt.BorderLayout;
-import java.util.HashMap;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-
-import javax.swing.WindowConstants;
-import javax.swing.border.BevelBorder;
-import javax.swing.SwingUtilities;
+import java.util.HashMap;
 
 
 /**
@@ -38,7 +21,7 @@ import javax.swing.SwingUtilities;
  * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
  * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
-public class Main extends javax.swing.JFrame implements ActionListener
+public class Main2 extends javax.swing.JFrame implements ActionListener
 {
     private JPanel jPanel1;
     private JTextPane tpTextTrain;
@@ -74,14 +57,14 @@ public class Main extends javax.swing.JFrame implements ActionListener
         {
             public void run()
             {
-                Main inst = new Main();
+                Main2 inst = new Main2();
                 inst.setLocationRelativeTo(null);
                 inst.setVisible(true);
             }
         });
     }
 
-    public Main()
+    public Main2()
     {
         super();
         initGUI();

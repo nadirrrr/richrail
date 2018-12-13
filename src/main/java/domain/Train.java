@@ -7,19 +7,22 @@ import java.util.ArrayList;
 public class Train {
 
     private String name;
-    private ArrayList<RollingComponent> rollingComponents;
-
+    private ArrayList<RollingComponent> rollingComponents = new ArrayList<>();
 
     public Train(String name) {
+
         this.name = name;
-    }
-    public Train(String name, ArrayList<RollingComponent> rollingComponents) {
-        this.name = name;
-        this.rollingComponents = rollingComponents;
+
     }
 
     public String getName() {
-        return name;
+
+        return this.name;
+
+    }
+
+    public void addRollingComponent(RollingComponent rollingComponent) {
+        rollingComponents.add(rollingComponent);
     }
 
 }
