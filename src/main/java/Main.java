@@ -38,6 +38,7 @@ import javax.swing.SwingUtilities;
  * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
  * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
+
 public class Main extends javax.swing.JFrame implements ActionListener
 {
     private JPanel jPanel1;
