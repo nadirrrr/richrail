@@ -179,34 +179,10 @@ public class Main extends javax.swing.JFrame implements ActionListener
                     btnAddWagon1.addActionListener(this);
                 }
                 {
-                    btnAddWagon2 = new JButton();
-                    pnlWagons.add(btnAddWagon2, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-                    btnAddWagon2.setText("add wagon 2");
-                    btnAddWagon2.addActionListener(this);
-                }
-                {
-                    jButton1 = new JButton();
-                    pnlWagons.add(jButton1, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-                    jButton1.setText("add wagon 3");
-                    jButton1.addActionListener(this);
-                }
-                {
                     btnDeleteWagon1 = new JButton();
                     pnlWagons.add(btnDeleteWagon1, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
                     btnDeleteWagon1.setText("delete wagon 1");
                     btnDeleteWagon1.addActionListener(this);
-                }
-                {
-                    btnDeleteWagon2 = new JButton();
-                    pnlWagons.add(btnDeleteWagon2, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-                    btnDeleteWagon2.setText("delete wagon 2");
-                    btnDeleteWagon2.addActionListener(this);
-                }
-                {
-                    btnDeleteWagon3 = new JButton();
-                    pnlWagons.add(btnDeleteWagon3, new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-                    btnDeleteWagon3.setText("delete wagon 3");
-                    btnDeleteWagon3.addActionListener(this);
                 }
             }
             pack();
