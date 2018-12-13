@@ -44,8 +44,6 @@ public class Main extends javax.swing.JFrame implements ActionListener
 {
     private JPanel jPanel1;
     private JTextPane tpTextTrain;
-    private JButton btnDeleteWagon3;
-    private JButton btnDeleteWagon2;
     private JButton btnDeleteWagon1;
     private JButton jButton1;
     private JPanel pnlWagons;
@@ -188,7 +186,7 @@ public class Main extends javax.swing.JFrame implements ActionListener
                 }
             }
             pack();
-            setSize(800, 600);
+            setSize(1200, 900);
             numberOfWagons = new HashMap();
         } catch (Exception e)
         {
@@ -271,14 +269,7 @@ public class Main extends javax.swing.JFrame implements ActionListener
         else if (event.getSource() == btnDeleteWagon1)
         {
             repaint(30+TRAINLENGTH,80+currentTrain*OFFSET,1,1);
-        }
-        else if (event.getSource() == btnDeleteWagon2)
-        {
-            repaint(30+TRAINLENGTH,80+currentTrain*OFFSET,1,1);
-        }
-        else if (event.getSource() == btnDeleteWagon3)
-        {
-            repaint(30+TRAINLENGTH,80+currentTrain*OFFSET,1,1);
+            btnChooseTrain.doClick();
         }
     }
 
