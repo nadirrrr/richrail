@@ -35,4 +35,10 @@ public class Locomotive implements RollingComponent {
         return g;
     }
 
+    // @TODO: Temporarily. We're gonna adjust the logic behind this
+    @Override
+    public Graphics drawComponent(Graphics g, int currentNumberOfWagons, int TRAINLENGTH, int currentTrain, int OFFSET) {
+        return null;
+    }
+
 }

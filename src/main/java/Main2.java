@@ -1,30 +1,12 @@
 import domain.Locomotive;
 import domain.Train;
-import domain.Wagon;
 
-
-import java.awt.BorderLayout;
-import java.util.HashMap;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-
-import javax.swing.WindowConstants;
-import javax.swing.border.BevelBorder;
-import javax.swing.SwingUtilities;
+import java.util.HashMap;
 
 
 /**
@@ -39,8 +21,7 @@ import javax.swing.SwingUtilities;
  * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
  * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
-
-public class Main extends javax.swing.JFrame implements ActionListener
+public class Main2 extends javax.swing.JFrame implements ActionListener
 {
     private JPanel jPanel1;
     private JTextPane tpTextTrain;
@@ -76,14 +57,14 @@ public class Main extends javax.swing.JFrame implements ActionListener
         {
             public void run()
             {
-                Main inst = new Main();
+                Main2 inst = new Main2();
                 inst.setLocationRelativeTo(null);
                 inst.setVisible(true);
             }
         });
     }
 
-    public Main()
+    public Main2()
     {
         super();
         initGUI();
@@ -181,10 +162,34 @@ public class Main extends javax.swing.JFrame implements ActionListener
                     btnAddWagon1.addActionListener(this);
                 }
                 {
+                    btnAddWagon2 = new JButton();
+                    pnlWagons.add(btnAddWagon2, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+                    btnAddWagon2.setText("add wagon 2");
+                    btnAddWagon2.addActionListener(this);
+                }
+                {
+                    jButton1 = new JButton();
+                    pnlWagons.add(jButton1, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+                    jButton1.setText("add wagon 3");
+                    jButton1.addActionListener(this);
+                }
+                {
                     btnDeleteWagon1 = new JButton();
                     pnlWagons.add(btnDeleteWagon1, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
                     btnDeleteWagon1.setText("delete wagon 1");
                     btnDeleteWagon1.addActionListener(this);
+                }
+                {
+                    btnDeleteWagon2 = new JButton();
+                    pnlWagons.add(btnDeleteWagon2, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+                    btnDeleteWagon2.setText("delete wagon 2");
+                    btnDeleteWagon2.addActionListener(this);
+                }
+                {
+                    btnDeleteWagon3 = new JButton();
+                    pnlWagons.add(btnDeleteWagon3, new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+                    btnDeleteWagon3.setText("delete wagon 3");
+                    btnDeleteWagon3.addActionListener(this);
                 }
             }
             pack();
@@ -326,12 +331,14 @@ public class Main extends javax.swing.JFrame implements ActionListener
         }
     }
 
-    public void drawWagon(String wagon2)
+    public void drawWagon(String wagon)
     {
         Graphics g = drawPanel.getGraphics();
-
-        // @TODO: Change
-        Wagon wagon = new Wagon();
-        wagon.drawComponent(g, currentNumberOfWagons, TRAINLENGTH, currentTrain, OFFSET);
+        g.setColor(Color.LIGHT_GRAY);
+        g.fillRect(30+currentNumberOfWagons*TRAINLENGTH,80+currentTrain*OFFSET,80,40);
+        g.setColor(Color.BLACK);
+        g.fillRoundRect(35+currentNumberOfWagons*TRAINLENGTH, 120+currentTrain*OFFSET, 20, 20, 20, 20);
+        g.fillRoundRect(80+currentNumberOfWagons*TRAINLENGTH, 120+currentTrain*OFFSET, 20, 20, 20, 20);
+        g.drawString(wagon,40+currentNumberOfWagons*TRAINLENGTH,105+currentTrain*OFFSET);
     }
 }
