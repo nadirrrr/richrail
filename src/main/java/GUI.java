@@ -7,13 +7,13 @@ import javafx.scene.Parent;
 
 public class GUI extends Application {
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/Users/berkaysimsek/IdeaProjects/richrail/GUI.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
 
-        Scene scene = new Scene(root, 300, 275);
+        Scene scene = new Scene(root, 600, 449);
 
         stage.setTitle("Train system");
         stage.setScene(scene);
-        //stage.setResizable(false);
+        stage.setResizable(false);
         stage.show();
     }
 
