@@ -1,4 +1,4 @@
-package domain;
+package richrail.domain;
 
 import java.awt.*;
 import java.util.ArrayList;
