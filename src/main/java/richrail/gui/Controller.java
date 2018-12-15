@@ -129,32 +129,50 @@ public class Controller implements Initializable {
         locomotives.put(size,0);
     }
 
+    private void delTrain(String trainName) {
+        int index = trains.indexOf(trainName);
+        trains.remove(index);
+    }
+
+    private void addWagon(int key) {
+        wagons.put(key, wagons.get(key)+1);
+    }
+
+    private void delWagon(int key) {
+        wagons.put(key, wagons.get(key)-1);
+    }
+
     @FXML
     private void handleAction(ActionEvent event) {
         //txtArea.setText("ewa nadir");
 
         if(event.getSource() == choiceBox) {
             selectedTrain = choiceBox.getValue().toString();
-            refreshPage();
         }
 
         if(event.getSource() == btn_addtrain) {
             addTrain(txtf_trainname.getText().toLowerCase()); // name of train
-            refreshPage();
         }
         else if(event.getSource() == btn_addwagon) {
+            int key = trains.indexOf(selectedTrain);
+            addWagon(key);
         }
         else if(event.getSource() == btn_addlocomotive) {
         }
         else if(event.getSource() == btn_deletewagon) {
+            int key = trains.indexOf(selectedTrain);
+            delWagon(key);
         }
         else if(event.getSource() == btn_deletetrain) {
+            selectedTrain = choiceBox.getValue().toString();
+            delTrain(selectedTrain);
         }
         else if(event.getSource() == btn_deletelocomotive) {
         }
         else if(event.getSource() == btn_execute) {
             System.out.println(choiceBox.getValue());
         }
+        refreshPage();
         //System.out.println(trains.indexOf(selectedTrain));
     }
 
