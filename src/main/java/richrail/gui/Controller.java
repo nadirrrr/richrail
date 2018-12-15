@@ -66,6 +66,9 @@ public class Controller implements Initializable {
     @FXML
     TextField txtf_trainname;
 
+    private Image train = new Image("train.png");
+    private Image wagon = new Image("wagon.png");
+
     private String selectedTrain;
 
     ObservableList<String> trains = FXCollections.observableArrayList("nadir-trein", "berkay-trein", "sohaib-trein", "moussa-trein", "amin-trein");
@@ -98,14 +101,16 @@ public class Controller implements Initializable {
         gridpane.getChildren().clear(); // clear grid so that we can put everything back again based on the selected train
 
         //create train
-        gridpane.add(new Button("Train"), 0, 0); // starts with 0, 0
+        //gridpane.add(new Button("Train"), 0, 0); // starts with 0, 0
+        gridpane.add(new ImageView(train), 0, 0); // starts with 0, 0
 
         //create wagons
         int trainId = trains.indexOf(selectedTrain);
         if(trainId != -1) { // if selected train is null
             int w = 1;
             while (w < wagons.get(trainId)) {
-                gridpane.add(new Button("Wagon " + w), w, 0); // starts on 1, 0 because train is on 0, 0
+                //gridpane.add(new Button("Wagon " + w), w, 0); // starts on 1, 0 because train is on 0, 0
+                gridpane.add(new ImageView(wagon), w, 0); // starts with 0, 0
                 w++;
             }
 
