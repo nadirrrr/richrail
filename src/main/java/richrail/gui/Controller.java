@@ -20,6 +20,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
+import richrail.storage.FileStorage;
+import richrail.storage.Storage;
 
 public class Controller implements Initializable {
 
@@ -78,6 +80,8 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         refreshPage();
 
+        FileStorage storage = new FileStorage();
+        storage.initialize();
         /*
             Dummy info
          */
