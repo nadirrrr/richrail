@@ -1,6 +1,7 @@
 package richrail.gui;
 
 import java.net.URL;
+import java.util.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -60,33 +61,36 @@ public class Controller implements Initializable {
     @FXML
     Button btn_execute;
 
+    @FXML
+    TextField txtf_trainname;
+
     private String selectedTrain;
 
-    ObservableList<String> trains = FXCollections.observableArrayList("Nadir-trein", "Berkay-trein", "Sohaib-trein", "Moussa-trein", "Amin-trein");
-    private int[] wagons = new int[trains.size()];
-    private int[] locomotives = new int[trains.size()];
+    ObservableList<String> trains = FXCollections.observableArrayList("nadir-trein", "berkay-trein", "sohaib-trein", "moussa-trein", "amin-trein");
+    HashMap<Integer, Integer> wagons = new HashMap<>();
+    HashMap<Integer, Integer> locomotives = new HashMap<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        refreshPage();
+
+        /*
+            Dummy info
+         */
 
         // amount of wagons per train
-        wagons[0] = 1;
-        wagons[1] = 2;
-        wagons[2] = 3;
-        wagons[3] = 5;
-        wagons[4] = 1;
-
-        // amount of locomotives per train
-        locomotives[0] = 1;
-        locomotives[1] = 2;
-        locomotives[2] = 3;
-        locomotives[3] = 5;
-        locomotives[4] = 1;
-
-        choiceBox.setItems(trains); // initialize available trains
+        for(int i = 0; i < trains.size(); i++) {
+            int random = (int)(Math.random() * 5 + 1); // max 5, min 1
+            int random2 = (int)(Math.random() * 5 + 1); // max 5, min 1
+            wagons.put(i, random);
+            locomotives.put(i, random2);
+        }
     }
 
-    private void createEverything() {
+    private void refreshPage() {
+
+        choiceBox.setItems(trains); // initialize available trains
+
         gridpane.getChildren().clear(); // clear grid so that we can put everything back again based on the selected train
 
         //create train
@@ -96,18 +100,33 @@ public class Controller implements Initializable {
         int trainId = trains.indexOf(selectedTrain);
         if(trainId != -1) { // if selected train is null
             int w = 1;
-            while (w < wagons[trainId]) {
+            while (w < wagons.get(trainId)) {
                 gridpane.add(new Button("Wagon " + w), w, 0); // starts on 1, 0 because train is on 0, 0
                 w++;
             }
-        }
 
-        //create locomotives
+            //create locomotives
 //        int l = w;
 //        while (l < locomotives) {
 //            gridpane.add(new Button("Locomotive " + l), l, 0);
 //            l++;
 //        }
+        }
+//        System.out.println("trains: " + trains + " size: " + trains.size());
+//        System.out.println("wagons: " + wagons + " size: " + wagons.size());
+//        System.out.println("locomotives: " + locomotives + " size: " + locomotives.size());
+    }
+
+    private void addTrain(String trainName) {
+        int size = trains.size();
+        if(!trainName.equals("type train name")) { // nothing changed abort
+            if(!trains.contains(trainName)) { // record already exists abort
+                trains.add(trainName); // if not add to trains success
+            }
+            //System.out.println(trains.contains(trainName));
+        }
+        wagons.put(size,0);
+        locomotives.put(size,0);
     }
 
     @FXML
@@ -116,10 +135,12 @@ public class Controller implements Initializable {
 
         if(event.getSource() == choiceBox) {
             selectedTrain = choiceBox.getValue().toString();
-            createEverything();
+            refreshPage();
         }
 
         if(event.getSource() == btn_addtrain) {
+            addTrain(txtf_trainname.getText().toLowerCase()); // name of train
+            refreshPage();
         }
         else if(event.getSource() == btn_addwagon) {
         }
