@@ -46,8 +46,8 @@ public class Controller implements Initializable {
     @FXML
     Button btn_addwagon;
 
-    @FXML
-    Button btn_addlocomotive;
+//    @FXML
+//    Button btn_addlocomotive;
 
     @FXML
     Button btn_deletewagon;
@@ -55,8 +55,8 @@ public class Controller implements Initializable {
     @FXML
     Button btn_deletetrain;
 
-    @FXML
-    Button btn_deletelocomotive;
+//    @FXML
+//    Button btn_deletelocomotive;
 
     @FXML
     Button btn_execute;
@@ -66,6 +66,7 @@ public class Controller implements Initializable {
 
     private Image train = new Image("train.png");
     private Image wagon = new Image("wagon.png");
+    private Image locomotive = new Image("locomotive.png");
 
     private String selectedTrain;
 
@@ -110,12 +111,13 @@ public class Controller implements Initializable {
                 w++;
             }
 
-            //create locomotives
-//        int l = w;
-//        while (l < locomotives) {
-//            gridpane.add(new Button("Locomotive " + l), l, 0);
-//            l++;
-//        }
+//            System.out.println(locomotives.get(trainId));
+//            int startPos = wagons.get(trainId)+1;
+//            int j = 0;
+//            while (j < locomotives.get(trainId)) {
+//                gridpane.add(new ImageView(locomotive), (startPos+j), 0); // starts with 0, 0
+//                j++;
+//            }
         }
 //        System.out.println("trains: " + trains + " size: " + trains.size());
 //        System.out.println("wagons: " + wagons + " size: " + wagons.size());
@@ -144,7 +146,9 @@ public class Controller implements Initializable {
     }
 
     private void delWagon(int key) {
-        wagons.put(key, wagons.get(key)-1);
+        if(wagons.get(key) > 0) {
+            wagons.put(key, wagons.get(key) - 1);
+        }
     }
 
     @FXML
@@ -162,8 +166,8 @@ public class Controller implements Initializable {
             int key = trains.indexOf(selectedTrain);
             addWagon(key);
         }
-        else if(event.getSource() == btn_addlocomotive) {
-        }
+//        else if(event.getSource() == btn_addlocomotive) {
+//        }
         else if(event.getSource() == btn_deletewagon) {
             int key = trains.indexOf(selectedTrain);
             delWagon(key);
@@ -172,8 +176,8 @@ public class Controller implements Initializable {
             selectedTrain = choiceBox.getValue().toString();
             delTrain(selectedTrain);
         }
-        else if(event.getSource() == btn_deletelocomotive) {
-        }
+//        else if(event.getSource() == btn_deletelocomotive) {
+//        }
         else if(event.getSource() == btn_execute) {
             System.out.println(choiceBox.getValue());
         }
