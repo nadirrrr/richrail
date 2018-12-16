@@ -45,27 +45,45 @@
         }
       },
       {
-        "type": "richrail.domain.Wagon",
+        "type": "richrail.domain.Locomotive",
         "data": {
-          "name": "jajajjaja"
+          "name": "locomotiefje"
+        }
+      },
+      {
+        "type": "richrail.domain.Locomotive",
+        "data": {
+          "name": "locomotiefje"
+        }
+      },
+      {
+        "type": "richrail.domain.Locomotive",
+        "data": {
+          "name": "locomotiefje"
+        }
+      },
+      {
+        "type": "richrail.domain.Locomotive",
+        "data": {
+          "name": "locomotiefje"
+        }
+      },
+      {
+        "type": "richrail.domain.Locomotive",
+        "data": {
+          "name": "locomotiefje"
         }
       },
       {
         "type": "richrail.domain.Wagon",
         "data": {
-          "name": "jajajjaja"
+          "name": "lalala"
         }
       },
       {
-        "type": "richrail.domain.Wagon",
+        "type": "richrail.domain.Locomotive",
         "data": {
-          "name": "jajajjaja"
-        }
-      },
-      {
-        "type": "richrail.domain.Wagon",
-        "data": {
-          "name": "jajajjaja"
+          "name": "locomotiefje"
         }
       }
     ]
@@ -149,11 +167,114 @@
         "data": {
           "name": "asdasdasda22sd"
         }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "asdasdasda22sd"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "asdasdasda22sd"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "asdasdasda22sd"
+        }
       }
     ]
   },
   {
     "name": "berkay",
-    "rollingComponents": []
+    "rollingComponents": [
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "berkay"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "berkay"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "berkay"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "berkay"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "berkay"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "berkay"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "berkay"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "berkay"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "berkay"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "berkay"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "berkay"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "berkay"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "berkay"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "berkay"
+        }
+      }
+    ]
   }
 ]

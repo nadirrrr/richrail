@@ -5,12 +5,12 @@ import java.util.ArrayList;
 
 public class Locomotive implements RollingComponent {
 
-    private Train train;
+    private String name;
 
 
-    public Locomotive(Train train) {
+    public Locomotive(String name) {
 
-        this.train = train;
+        this.name = name;
     }
 
 }

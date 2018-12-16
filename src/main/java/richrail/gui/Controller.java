@@ -21,6 +21,8 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import org.omg.CORBA.TRANSACTION_MODE;
+import richrail.domain.Locomotive;
+import richrail.domain.RollingComponent;
 import richrail.domain.Train;
 import richrail.domain.Wagon;
 import richrail.storage.FileStorage;
@@ -48,6 +50,12 @@ public class Controller implements Initializable {
 
     @FXML
     Button btn_addwagon;
+
+    @FXML
+    Button btn_deletelocomotive;
+
+    @FXML
+    Button btn_addlocomotive;
 
     @FXML
     Button btn_deletewagon;
@@ -93,8 +101,19 @@ public class Controller implements Initializable {
         if(trainId != null) {
             int w = 1;
             while (w < selectedTrain.getRollingComponents().size()) {
-                gridpane.add(new ImageView(wagon), w, 0);
-                w++;
+
+                for(RollingComponent rollingComponent : selectedTrain.getRollingComponents()) {
+                    if(rollingComponent instanceof Wagon) {
+
+                        gridpane.add(new ImageView(wagon), w, 0);
+                        w++;
+
+                    }
+                    else if (rollingComponent instanceof Locomotive) {
+                        gridpane.add(new ImageView(train), w, 0);
+                        w++;
+                    }
+                }
             }
 
 
@@ -119,13 +138,12 @@ public class Controller implements Initializable {
 
     }
 
-    private void addWagon(Train train) {
-        System.out.println(train.getName());
-        fileStorage.addRollingComponent(train, new Wagon(train.getName()));
-
+    private void createRollingComponent(Train train, RollingComponent rollingComponent) {
+        fileStorage.addRollingComponent(train, rollingComponent);
     }
 
-    private void delWagon(Train train) {
+
+    private void deleteRollingComponent(Train train) {
         if(train.getRollingComponents().size() > 0) {
             // @TODO: Doesn't seem like a perfect fix
             fileStorage.removeRollingComponent(train);
@@ -149,11 +167,17 @@ public class Controller implements Initializable {
             trains = FXCollections.observableArrayList(fileStorage.reloadTrainList());
         }
         else if(event.getSource() == btn_addwagon) {
-            addWagon(selectedTrain);
+            createRollingComponent(selectedTrain, new Wagon("lalala"));
+        }
+        else if(event.getSource() == btn_deletelocomotive) {
+            deleteRollingComponent(selectedTrain);
         }
 
+        else if(event.getSource() == btn_addlocomotive) {
+            createRollingComponent(selectedTrain, new Locomotive("locomotiefje"));
+        }
         else if(event.getSource() == btn_deletewagon) {
-            delWagon(selectedTrain);
+            deleteRollingComponent(selectedTrain);
 
         }
 
