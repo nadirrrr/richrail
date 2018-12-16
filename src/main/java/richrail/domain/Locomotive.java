@@ -13,9 +13,4 @@ public class Locomotive implements RollingComponent {
         this.train = train;
     }
 
-    @Override
-    public ArrayList<RollingComponent> getAllComponents() {
-        return null;
-    }
-
 }

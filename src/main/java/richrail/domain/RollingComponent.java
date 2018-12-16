@@ -4,5 +4,5 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public interface RollingComponent {
-    public ArrayList<RollingComponent> getAllComponents();
+    public boolean equals(Object object);
 }

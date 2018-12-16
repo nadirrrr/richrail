@@ -20,6 +20,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
+import org.omg.CORBA.TRANSACTION_MODE;
+import richrail.domain.Train;
+import richrail.domain.Wagon;
 import richrail.storage.FileStorage;
 import richrail.storage.Storage;
 
@@ -29,6 +32,8 @@ public class Controller implements Initializable {
     // Je maakt dus een property aan zoals commandTextArea met @FXML notatie zoals hieronder
     // Daarna assign je de ID in sample.fxml bij de TextArea/Button of whatever met fx:id. Met buttons gebruik je onHandleAction in sample.fxml e
 
+
+    // These properties clearly need some refactor =) @berkay
     @FXML
     private TextArea txtArea;
 
@@ -38,27 +43,17 @@ public class Controller implements Initializable {
     @FXML
     ChoiceBox choiceBox; // treinen
 
-    /*
-    Buttons
-     */
-
     @FXML
     Button btn_addtrain;
 
     @FXML
     Button btn_addwagon;
 
-//    @FXML
-//    Button btn_addlocomotive;
-
     @FXML
     Button btn_deletewagon;
 
     @FXML
     Button btn_deletetrain;
-
-//    @FXML
-//    Button btn_deletelocomotive;
 
     @FXML
     Button btn_execute;
@@ -68,31 +63,20 @@ public class Controller implements Initializable {
 
     private Image train = new Image("train.png");
     private Image wagon = new Image("wagon.png");
-    private Image locomotive = new Image("locomotive.png");
 
-    private String selectedTrain;
+    private Train selectedTrain;
 
-    ObservableList<String> trains = FXCollections.observableArrayList("nadir-trein", "berkay-trein", "sohaib-trein", "moussa-trein", "amin-trein");
-    HashMap<Integer, Integer> wagons = new HashMap<>();
-    HashMap<Integer, Integer> locomotives = new HashMap<>();
+
+    private FileStorage fileStorage = new FileStorage();
+    private ObservableList<Train> trains = FXCollections.observableArrayList(fileStorage.trainList);
+
+    // @TODO: Fix NullPointerException bugs when selecting null objects, and finish file storage
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Assign the trainList after the fileStorage loads the list of all trains..
         refreshPage();
 
-        FileStorage storage = new FileStorage();
-        storage.initialize();
-        /*
-            Dummy info
-         */
-
-        // amount of wagons per train
-        for(int i = 0; i < trains.size(); i++) {
-            int random = (int)(Math.random() * 5 + 1); // max 5, min 1
-            int random2 = (int)(Math.random() * 5 + 1); // max 5, min 1
-            wagons.put(i, random);
-            locomotives.put(i, random2);
-        }
     }
 
     private void refreshPage() {
@@ -101,92 +85,83 @@ public class Controller implements Initializable {
 
         gridpane.getChildren().clear(); // clear grid so that we can put everything back again based on the selected train
 
-        //create train
-        //gridpane.add(new Button("Train"), 0, 0); // starts with 0, 0
+        //create train image
         gridpane.add(new ImageView(train), 0, 0); // starts with 0, 0
 
         //create wagons
-        int trainId = trains.indexOf(selectedTrain);
-        if(trainId != -1) { // if selected train is null
+        Train trainId = selectedTrain;
+        if(trainId != null) {
             int w = 1;
-            while (w < wagons.get(trainId)) {
-                //gridpane.add(new Button("Wagon " + w), w, 0); // starts on 1, 0 because train is on 0, 0
-                gridpane.add(new ImageView(wagon), w, 0); // starts with 0, 0
+            while (w < selectedTrain.getRollingComponents().size()) {
+                gridpane.add(new ImageView(wagon), w, 0);
                 w++;
             }
 
-//            System.out.println(locomotives.get(trainId));
-//            int startPos = wagons.get(trainId)+1;
-//            int j = 0;
-//            while (j < locomotives.get(trainId)) {
-//                gridpane.add(new ImageView(locomotive), (startPos+j), 0); // starts with 0, 0
-//                j++;
-//            }
+
         }
-//        System.out.println("trains: " + trains + " size: " + trains.size());
-//        System.out.println("wagons: " + wagons + " size: " + wagons.size());
-//        System.out.println("locomotives: " + locomotives + " size: " + locomotives.size());
     }
 
     private void addTrain(String trainName) {
         int size = trains.size();
         if(!trainName.equals("type train name")) { // nothing changed abort
-            if(!trains.contains(trainName)) { // record already exists abort
-                trains.add(trainName); // if not add to trains success
+
+            // @TODO: Change to boolean maybe.. :/
+            if(fileStorage.findTrainByName(trains, trainName) == null) {
+                trains.add(new Train(trainName));
             }
-            //System.out.println(trains.contains(trainName));
+
         }
-        wagons.put(size,0);
-        locomotives.put(size,0);
+
     }
 
-    private void delTrain(String trainName) {
-        int index = trains.indexOf(trainName);
-        trains.remove(index);
+    private void delTrain(Train train) {
+
+        trains.remove(train);
+
     }
 
-    private void addWagon(int key) {
-        wagons.put(key, wagons.get(key)+1);
+    private void addWagon(Train train) {
+        train.addRollingComponent(new Wagon(train));
     }
 
-    private void delWagon(int key) {
-        if(wagons.get(key) > 0) {
-            wagons.put(key, wagons.get(key) - 1);
+    private void delWagon(Train train) {
+        if(train.getRollingComponents().size() > 0) {
+            // @TODO: Doesn't seem like a perfect fix
+            train.getRollingComponents().remove(train.getRollingComponents().size() - 1);
         }
     }
 
     @FXML
     private void handleAction(ActionEvent event) {
-        //txtArea.setText("ewa nadir");
 
         if(event.getSource() == choiceBox) {
-            selectedTrain = choiceBox.getValue().toString();
+            selectedTrain = fileStorage.findTrainByName(trains, choiceBox.getValue().toString());
         }
 
         if(event.getSource() == btn_addtrain) {
             addTrain(txtf_trainname.getText().toLowerCase()); // name of train
         }
         else if(event.getSource() == btn_addwagon) {
-            int key = trains.indexOf(selectedTrain);
-            addWagon(key);
+            addWagon(selectedTrain);
         }
-//        else if(event.getSource() == btn_addlocomotive) {
-//        }
+
         else if(event.getSource() == btn_deletewagon) {
-            int key = trains.indexOf(selectedTrain);
-            delWagon(key);
+            delWagon(selectedTrain);
         }
+
         else if(event.getSource() == btn_deletetrain) {
-            selectedTrain = choiceBox.getValue().toString();
+            selectedTrain = trains.get(0);
+
+            System.out.println("test" + selectedTrain.getName());
+            System.out.println("test" + selectedTrain);
+
             delTrain(selectedTrain);
         }
-//        else if(event.getSource() == btn_deletelocomotive) {
-//        }
+
         else if(event.getSource() == btn_execute) {
             System.out.println(choiceBox.getValue());
         }
         refreshPage();
-        //System.out.println(trains.indexOf(selectedTrain));
     }
 
 }
