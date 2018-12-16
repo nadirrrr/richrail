@@ -17,7 +17,7 @@
       <Button fx:id="btnDeleteTrain" onAction="#handleAction" layoutX="194.0" layoutY="211.0" mnemonicParsing="false" text="Delete train" />
       <!--<Button fx:id="btn_deletelocomotive" onAction="#handleAction" layoutX="399.0" layoutY="211.0" mnemonicParsing="false" text="Delete locomotive" />-->
       <TextArea fx:id="txtArea" layoutX="14.0" layoutY="251.0" prefHeight="143.0" prefWidth="213.0" />
-      <TextField layoutX="14.0" layoutY="408.0" prefHeight="27.0" prefWidth="213.0" text="Type command here" />
+      <TextField fx:id="cliCommand" layoutX="14.0" layoutY="408.0" prefHeight="27.0" prefWidth="213.0" text="Type command here" />
       <Button fx:id="btnExecute" onAction="#handleAction" layoutX="238.0" layoutY="408.0" mnemonicParsing="false" text="Execute" />
       <TextArea layoutX="341.0" layoutY="251.0" prefHeight="143.0" prefWidth="213.0" />
       <GridPane fx:id="gridPane" layoutX="21.0" layoutY="14.0" prefHeight="143.0" prefWidth="555.0">

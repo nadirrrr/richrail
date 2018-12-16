@@ -25,70 +25,74 @@ import richrail.domain.Locomotive;
 import richrail.domain.RollingComponent;
 import richrail.domain.Train;
 import richrail.domain.Wagon;
+import richrail.parser.TrainCliService;
 import richrail.storage.FileStorage;
 import richrail.storage.Storage;
 
 public class Controller implements Initializable {
+
+    // Hier staan goede voorbeelden: https://gist.github.com/skrb/3052988
+    // Je maakt dus een property aan zoals commandTextArea met @FXML notatie zoals hieronder
+    // Daarna assign je de ID in sample.fxml bij de TextArea/Button of whatever met fx:id. Met buttons gebruik je onHandleAction in sample.fxml e
+
 
     // These properties clearly need some refactor =) @berkay
     @FXML
     private TextArea txtArea;
 
     @FXML
-    private GridPane gridPane;
+    GridPane gridPane;
 
     @FXML
-    private ChoiceBox choiceBox; // treinen
+    ChoiceBox choiceBox;
 
     @FXML
-    private Button btnAddTrain;
+    Button btnAddTrain;
 
     @FXML
-    private Button btnAddWagon;
+    Button btnAddWagon;
 
     @FXML
-    private Button btnAddLocomotive;
+    Button btnAddLocomotive;
 
     @FXML
-    private Button btnDeleteComponent;
+    Button btnDeleteComponent;
 
     @FXML
-    private Button btnDeleteTrain;
+    Button btnDeleteTrain;
 
     @FXML
-    private Button btnExecute;
+    Button btnExecute;
 
     @FXML
-    private TextField textFieldTrainName;
+    TextField cliCommand;
+
+    @FXML
+    TextField textFieldTrainName;
 
     private Image train = new Image("train.png");
     private Image wagon = new Image("wagon.png");
 
     private Train selectedTrain;
 
-
     private FileStorage fileStorage = new FileStorage();
     private ObservableList<Train> trains = FXCollections.observableArrayList(fileStorage.reloadTrainList());
-
-    // @TODO: Fix NullPointerException bugs when selecting null objects, and finish file storage
+    private TrainCliService trainCliService = new TrainCliService();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Assign the trainList after the fileStorage loads the list of all trains..
+
         refreshPage();
 
     }
 
     private void refreshPage() {
 
-        choiceBox.setItems(trains); // initialize available trains
+        choiceBox.setItems(trains);
 
-        gridPane.getChildren().clear(); // clear grid so that we can put everything back again based on the selected train
-
-        //create train image
+        gridPane.getChildren().clear();
         gridPane.add(new ImageView(train), 0, 0); // starts with 0, 0
 
-        //create wagons
         Train trainId = selectedTrain;
         if(trainId != null) {
             int w = 1;
@@ -113,34 +117,13 @@ public class Controller implements Initializable {
     }
 
     private void addTrain(String trainName) {
+
         if(!trainName.equals("type train name")) { // nothing changed abort
 
-            // @TODO: Change to boolean maybe.. :/
-            if(fileStorage.findTrainByName(trainName) == null) {
                 fileStorage.createTrain(trainName);
-            }
 
         }
 
-    }
-
-    private void delTrain(Train train) {
-
-        fileStorage.removeTrain(train);
-
-    }
-
-    private void createRollingComponent(Train train, RollingComponent rollingComponent) {
-        fileStorage.addRollingComponent(train, rollingComponent);
-    }
-
-
-    private void deleteRollingComponent(Train train) {
-        if(train.getRollingComponents().size() > 0) {
-            // @TODO: Doesn't seem like a perfect fix
-            fileStorage.removeRollingComponent(train);
-//            train.getRollingComponents().remove(train.getRollingComponents().size() - 1);
-        }
     }
 
     @FXML
@@ -159,26 +142,29 @@ public class Controller implements Initializable {
             trains = FXCollections.observableArrayList(fileStorage.reloadTrainList());
         }
         else if(event.getSource() == btnAddWagon) {
-            createRollingComponent(selectedTrain, new Wagon("lalala"));
+            fileStorage.addRollingComponent(selectedTrain, new Wagon("lalala"));
         }
-//        else if(event.getSource() == btn_deletelocomotive) {
-//            deleteRollingComponent(selectedTrain);
-//        }
+
         else if(event.getSource() == btnAddLocomotive) {
-            createRollingComponent(selectedTrain, new Locomotive("locomotiefje"));
+            fileStorage.addRollingComponent(selectedTrain, new Locomotive("locomotiefje"));
         }
         else if(event.getSource() == btnDeleteComponent) {
-            deleteRollingComponent(selectedTrain);
+            fileStorage.removeRollingComponent(selectedTrain);
 
         }
 
         else if(event.getSource() == btnDeleteTrain) {
-            delTrain(selectedTrain);
+
+            fileStorage.removeTrain(selectedTrain);
+
             trains = FXCollections.observableArrayList(fileStorage.reloadTrainList());
+
         }
 
         else if(event.getSource() == btnExecute) {
-            System.out.println(choiceBox.getValue());
+            trainCliService.sendCommand(cliCommand.getText());
+            trains = FXCollections.observableArrayList(fileStorage.loadAllTrains());
+            System.out.println(cliCommand.getText());
         }
         refreshPage();
     }

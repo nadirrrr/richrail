@@ -65,106 +65,6 @@
     ]
   },
   {
-    "name": "asdasdasdasd",
-    "rollingComponents": [
-      {
-        "type": "richrail.domain.Wagon",
-        "data": {
-          "name": "asdasdasdasd"
-        }
-      },
-      {
-        "type": "richrail.domain.Wagon",
-        "data": {
-          "name": "asdasdasdasd"
-        }
-      },
-      {
-        "type": "richrail.domain.Wagon",
-        "data": {
-          "name": "asdasdasdasd"
-        }
-      },
-      {
-        "type": "richrail.domain.Wagon",
-        "data": {
-          "name": "asdasdasdasd"
-        }
-      },
-      {
-        "type": "richrail.domain.Wagon",
-        "data": {
-          "name": "asdasdasdasd"
-        }
-      },
-      {
-        "type": "richrail.domain.Wagon",
-        "data": {
-          "name": "asdasdasdasd"
-        }
-      }
-    ]
-  },
-  {
-    "name": "asdasdasda22sd",
-    "rollingComponents": [
-      {
-        "type": "richrail.domain.Wagon",
-        "data": {
-          "name": "asdasdasda22sd"
-        }
-      },
-      {
-        "type": "richrail.domain.Wagon",
-        "data": {
-          "name": "asdasdasda22sd"
-        }
-      },
-      {
-        "type": "richrail.domain.Wagon",
-        "data": {
-          "name": "asdasdasda22sd"
-        }
-      },
-      {
-        "type": "richrail.domain.Wagon",
-        "data": {
-          "name": "asdasdasda22sd"
-        }
-      },
-      {
-        "type": "richrail.domain.Wagon",
-        "data": {
-          "name": "asdasdasda22sd"
-        }
-      },
-      {
-        "type": "richrail.domain.Wagon",
-        "data": {
-          "name": "asdasdasda22sd"
-        }
-      },
-      {
-        "type": "richrail.domain.Wagon",
-        "data": {
-          "name": "asdasdasda22sd"
-        }
-      },
-      {
-        "type": "richrail.domain.Wagon",
-        "data": {
-          "name": "asdasdasda22sd"
-        }
-      },
-      {
-        "type": "richrail.domain.Wagon",
-        "data": {
-          "name": "asdasdasda22sd"
-        }
-      }
-    ]
-  },
-  {
     "name": "berkay",
     "rollingComponents": [
       {
@@ -218,37 +118,125 @@
       {
         "type": "richrail.domain.Wagon",
         "data": {
-          "name": "berkay"
+          "name": "lalala"
         }
       },
       {
         "type": "richrail.domain.Wagon",
         "data": {
-          "name": "berkay"
+          "name": "lalala"
         }
       },
       {
         "type": "richrail.domain.Wagon",
         "data": {
-          "name": "berkay"
+          "name": "lalala"
+        }
+      },
+      {
+        "type": "richrail.domain.Locomotive",
+        "data": {
+          "name": "locomotiefje"
+        }
+      },
+      {
+        "type": "richrail.domain.Locomotive",
+        "data": {
+          "name": "locomotiefje"
+        }
+      },
+      {
+        "type": "richrail.domain.Locomotive",
+        "data": {
+          "name": "locomotiefje"
+        }
+      }
+    ]
+  },
+  {
+    "name": "ga",
+    "rollingComponents": [
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "A Wagon"
         }
       },
       {
         "type": "richrail.domain.Wagon",
         "data": {
-          "name": "berkay"
+          "name": "A Wagon"
+        }
+      },
+      {
+        "type": "richrail.domain.Locomotive",
+        "data": {
+          "name": "A Locomotive"
+        }
+      }
+    ]
+  },
+  {
+    "name": "hoihaha",
+    "rollingComponents": [
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "lalala"
         }
       },
       {
         "type": "richrail.domain.Wagon",
         "data": {
-          "name": "berkay"
+          "name": "lalala"
         }
       },
       {
         "type": "richrail.domain.Wagon",
         "data": {
-          "name": "berkay"
+          "name": "lalala"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "lalala"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "lalala"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "lalala"
+        }
+      },
+      {
+        "type": "richrail.domain.Locomotive",
+        "data": {
+          "name": "locomotiefje"
+        }
+      },
+      {
+        "type": "richrail.domain.Locomotive",
+        "data": {
+          "name": "locomotiefje"
+        }
+      },
+      {
+        "type": "richrail.domain.Locomotive",
+        "data": {
+          "name": "locomotiefje"
+        }
+      },
+      {
+        "type": "richrail.domain.Locomotive",
+        "data": {
+          "name": "locomotiefje"
         }
       }
     ]

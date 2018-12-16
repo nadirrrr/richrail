@@ -29,6 +29,7 @@ public class FileStorage implements Storage {
 
     private void writeJsonToFile() {
         try {
+
             BufferedWriter writer = new BufferedWriter(new FileWriter("controller.json"));
             writer.write(gson.toJson(trainList) + "\n");
             writer.close();
@@ -48,27 +49,30 @@ public class FileStorage implements Storage {
         return null;
     }
 
-
-
-
     @Override
     public Train createTrain(String name) {
 
-        Train train = new Train(name);
-        trainList.add(train);
+        if(this.findTrainByName(name) == null) {
+            Train train = new Train(name);
+            trainList.add(train);
 
-        writeJsonToFile();
+            writeJsonToFile();
+
+            return train;
+        }
 
         return null;
+
     }
 
     @Override
     public Train removeTrain(Train train) {
-        trainList.remove(findTrainByName(train)); // verwijder uit list
-        System.out.println(trainList);
-        writeJsonToFile(); // schrijf naar bestand
 
-        return null;
+        trainList.remove(findTrainByName(train));
+        writeJsonToFile();
+
+        return train;
+
     }
 
     @Override
@@ -76,7 +80,6 @@ public class FileStorage implements Storage {
 
 
         train.addRollingComponent(rollingComponent);
-        System.out.println(trainList.get(1).getRollingComponents());
         writeJsonToFile();
 
 
