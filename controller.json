@@ -61,30 +61,6 @@
         "data": {
           "name": "locomotiefje"
         }
-      },
-      {
-        "type": "richrail.domain.Locomotive",
-        "data": {
-          "name": "locomotiefje"
-        }
-      },
-      {
-        "type": "richrail.domain.Locomotive",
-        "data": {
-          "name": "locomotiefje"
-        }
-      },
-      {
-        "type": "richrail.domain.Wagon",
-        "data": {
-          "name": "lalala"
-        }
-      },
-      {
-        "type": "richrail.domain.Locomotive",
-        "data": {
-          "name": "locomotiefje"
-        }
       }
     ]
   },

@@ -40,34 +40,31 @@ public class Controller implements Initializable {
     private TextArea txtArea;
 
     @FXML
-    GridPane gridpane;
+    GridPane gridPane;
 
     @FXML
     ChoiceBox choiceBox; // treinen
 
     @FXML
-    Button btn_addtrain;
+    Button btnAddTrain;
 
     @FXML
-    Button btn_addwagon;
+    Button btnAddWagon;
 
     @FXML
-    Button btn_deletelocomotive;
+    Button btnAddLocomotive;
 
     @FXML
-    Button btn_addlocomotive;
+    Button btnDeleteComponent;
 
     @FXML
-    Button btn_deletewagon;
+    Button btnDeleteTrain;
 
     @FXML
-    Button btn_deletetrain;
+    Button btnExecute;
 
     @FXML
-    Button btn_execute;
-
-    @FXML
-    TextField txtf_trainname;
+    TextField textFieldTrainName;
 
     private Image train = new Image("train.png");
     private Image wagon = new Image("wagon.png");
@@ -91,10 +88,10 @@ public class Controller implements Initializable {
 
         choiceBox.setItems(trains); // initialize available trains
 
-        gridpane.getChildren().clear(); // clear grid so that we can put everything back again based on the selected train
+        gridPane.getChildren().clear(); // clear grid so that we can put everything back again based on the selected train
 
         //create train image
-        gridpane.add(new ImageView(train), 0, 0); // starts with 0, 0
+        gridPane.add(new ImageView(train), 0, 0); // starts with 0, 0
 
         //create wagons
         Train trainId = selectedTrain;
@@ -105,12 +102,12 @@ public class Controller implements Initializable {
                 for(RollingComponent rollingComponent : selectedTrain.getRollingComponents()) {
                     if(rollingComponent instanceof Wagon) {
 
-                        gridpane.add(new ImageView(wagon), w, 0);
+                        gridPane.add(new ImageView(wagon), w, 0);
                         w++;
 
                     }
                     else if (rollingComponent instanceof Locomotive) {
-                        gridpane.add(new ImageView(train), w, 0);
+                        gridPane.add(new ImageView(train), w, 0);
                         w++;
                     }
                 }
@@ -162,31 +159,30 @@ public class Controller implements Initializable {
             }
         }
 
-        if(event.getSource() == btn_addtrain) {
-            addTrain(txtf_trainname.getText().toLowerCase()); // name of train
+        if(event.getSource() == btnAddTrain) {
+            addTrain(textFieldTrainName.getText().toLowerCase()); // name of train
             trains = FXCollections.observableArrayList(fileStorage.reloadTrainList());
         }
-        else if(event.getSource() == btn_addwagon) {
+        else if(event.getSource() == btnAddWagon) {
             createRollingComponent(selectedTrain, new Wagon("lalala"));
         }
-        else if(event.getSource() == btn_deletelocomotive) {
-            deleteRollingComponent(selectedTrain);
-        }
-
-        else if(event.getSource() == btn_addlocomotive) {
+//        else if(event.getSource() == btn_deletelocomotive) {
+//            deleteRollingComponent(selectedTrain);
+//        }
+        else if(event.getSource() == btnAddLocomotive) {
             createRollingComponent(selectedTrain, new Locomotive("locomotiefje"));
         }
-        else if(event.getSource() == btn_deletewagon) {
+        else if(event.getSource() == btnDeleteComponent) {
             deleteRollingComponent(selectedTrain);
 
         }
 
-        else if(event.getSource() == btn_deletetrain) {
+        else if(event.getSource() == btnDeleteTrain) {
             delTrain(selectedTrain);
             trains = FXCollections.observableArrayList(fileStorage.reloadTrainList());
         }
 
-        else if(event.getSource() == btn_execute) {
+        else if(event.getSource() == btnExecute) {
             System.out.println(choiceBox.getValue());
         }
         refreshPage();

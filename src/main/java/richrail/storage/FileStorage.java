@@ -42,7 +42,6 @@ public class FileStorage implements Storage {
     public Train findTrainByName(Object object) {
         for (Train train : trainList) {
              if (train.getName().equals(object.toString())) {
-                 System.out.println("HELLO!!!");
                     return train;
                 }
             }
