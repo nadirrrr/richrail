@@ -34,10 +34,7 @@ public class RichRailListener extends RichRailBaseListener {
 
     @Override
     public void exitRemcommand(RichRailParser.RemcommandContext ctx) {
-
-        // @TODO: There are some issues with RichRail not detecting new file changes to the g4 file. We're temproriarl
-        // @TODO: .. gonna get the 2nd item until the issue has been resolved. It's not supposed to be a List..
-
+        
         fileStorage.removeRollingComponent(fileStorage.findTrainByName(ctx.ID().getText()));
 
 
