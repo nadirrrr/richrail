@@ -30,41 +30,36 @@ import richrail.storage.Storage;
 
 public class Controller implements Initializable {
 
-    // Hier staan goede voorbeelden: https://gist.github.com/skrb/3052988
-    // Je maakt dus een property aan zoals commandTextArea met @FXML notatie zoals hieronder
-    // Daarna assign je de ID in sample.fxml bij de TextArea/Button of whatever met fx:id. Met buttons gebruik je onHandleAction in sample.fxml e
-
-
     // These properties clearly need some refactor =) @berkay
     @FXML
     private TextArea txtArea;
 
     @FXML
-    GridPane gridPane;
+    private GridPane gridPane;
 
     @FXML
-    ChoiceBox choiceBox; // treinen
+    private ChoiceBox choiceBox; // treinen
 
     @FXML
-    Button btnAddTrain;
+    private Button btnAddTrain;
 
     @FXML
-    Button btnAddWagon;
+    private Button btnAddWagon;
 
     @FXML
-    Button btnAddLocomotive;
+    private Button btnAddLocomotive;
 
     @FXML
-    Button btnDeleteComponent;
+    private Button btnDeleteComponent;
 
     @FXML
-    Button btnDeleteTrain;
+    private Button btnDeleteTrain;
 
     @FXML
-    Button btnExecute;
+    private Button btnExecute;
 
     @FXML
-    TextField textFieldTrainName;
+    private TextField textFieldTrainName;
 
     private Image train = new Image("train.png");
     private Image wagon = new Image("wagon.png");
