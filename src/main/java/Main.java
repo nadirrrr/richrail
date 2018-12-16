@@ -5,13 +5,13 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
-public class GUI extends Application {
+public class Main extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
 
         Scene scene = new Scene(root, 600, 449);
 
-        stage.setTitle("Train system");
+        stage.setTitle("Train System");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

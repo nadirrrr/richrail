@@ -31,6 +31,8 @@ import richrail.storage.Storage;
 
 public class Controller implements Initializable {
 
+    @FXML
+    TextArea txtArea;
 
     @FXML
     GridPane gridPane;
@@ -125,7 +127,7 @@ public class Controller implements Initializable {
             try {
                 selectedTrain = fileStorage.findTrainByName(choiceBox.getValue());
             } catch(Exception err) {
-                // @TODO Looks like we ran in a NullPointerException because we are selecting a deleted train. Adjust this.
+                // @TODO Looks like we ran in a NullPointerException because we are selecting a deleted train. Probably there is a better solution for this?.
             }
         }
 
@@ -134,7 +136,7 @@ public class Controller implements Initializable {
             trains = FXCollections.observableArrayList(fileStorage.reloadTrainList());
         }
         else if(event.getSource() == btnAddWagon) {
-            fileStorage.addRollingComponent(selectedTrain, new Wagon("lalala"));
+            fileStorage.addRollingComponent(selectedTrain, new Wagon("waggonnetje"));
         }
 
         else if(event.getSource() == btnAddLocomotive) {
@@ -155,6 +157,7 @@ public class Controller implements Initializable {
 
         else if(event.getSource() == btnExecute) {
             trainCliService.sendCommand(cliCommand.getText());
+            txtArea.setText(cliCommand.getText() + "\n");
             trains = FXCollections.observableArrayList(fileStorage.loadAllTrains());
             System.out.println(cliCommand.getText());
         }

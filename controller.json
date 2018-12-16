@@ -138,18 +138,6 @@
         "data": {
           "name": "locomotiefje"
         }
-      },
-      {
-        "type": "richrail.domain.Locomotive",
-        "data": {
-          "name": "locomotiefje"
-        }
-      },
-      {
-        "type": "richrail.domain.Locomotive",
-        "data": {
-          "name": "locomotiefje"
-        }
       }
     ]
   },
@@ -237,6 +225,53 @@
         "type": "richrail.domain.Locomotive",
         "data": {
           "name": "locomotiefje"
+        }
+      }
+    ]
+  },
+  {
+    "name": "ha7",
+    "rollingComponents": [
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "waggonnetje"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "waggonnetje"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "waggonnetje"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "waggonnetje"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "waggonnetje"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "waggonnetje"
+        }
+      },
+      {
+        "type": "richrail.domain.Wagon",
+        "data": {
+          "name": "waggonnetje"
         }
       }
     ]

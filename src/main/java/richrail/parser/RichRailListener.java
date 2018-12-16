@@ -34,7 +34,7 @@ public class RichRailListener extends RichRailBaseListener {
 
     @Override
     public void exitRemcommand(RichRailParser.RemcommandContext ctx) {
-        
+
         fileStorage.removeRollingComponent(fileStorage.findTrainByName(ctx.ID().getText()));
 
 
