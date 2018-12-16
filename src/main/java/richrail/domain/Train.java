@@ -27,6 +27,10 @@ public class Train {
         rollingComponents.add(rollingComponent);
     }
 
+    public void removeRollingComponent(RollingComponent rollingComponent) {
+        rollingComponents.remove(rollingComponent);
+    }
+
     @Override
     public String toString() {
         return this.name;

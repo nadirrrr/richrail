@@ -9,8 +9,9 @@ import java.util.ArrayList;
 public interface Storage {
     public Train createTrain(String name);
     public Train removeTrain(Train train);
-    public Train addRollingComponent(RollingComponent rollingComponent);
+    public Train addRollingComponent(Train train, RollingComponent rollingComponent);
+    public Train removeRollingComponent(Train train);
     public ArrayList<Train> loadAllTrains();
-    public Train findTrainByName(ObservableList<Train> arrayList, String trainName);
+    public Train findTrainByName(Object object);
 
 }

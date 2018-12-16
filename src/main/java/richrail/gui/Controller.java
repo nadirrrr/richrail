@@ -68,7 +68,7 @@ public class Controller implements Initializable {
 
 
     private FileStorage fileStorage = new FileStorage();
-    private ObservableList<Train> trains = FXCollections.observableArrayList(fileStorage.trainList);
+    private ObservableList<Train> trains = FXCollections.observableArrayList(fileStorage.reloadTrainList());
 
     // @TODO: Fix NullPointerException bugs when selecting null objects, and finish file storage
 
@@ -102,12 +102,11 @@ public class Controller implements Initializable {
     }
 
     private void addTrain(String trainName) {
-        int size = trains.size();
         if(!trainName.equals("type train name")) { // nothing changed abort
 
             // @TODO: Change to boolean maybe.. :/
-            if(fileStorage.findTrainByName(trains, trainName) == null) {
-                trains.add(new Train(trainName));
+            if(fileStorage.findTrainByName(trainName) == null) {
+                fileStorage.createTrain(trainName);
             }
 
         }
@@ -116,18 +115,21 @@ public class Controller implements Initializable {
 
     private void delTrain(Train train) {
 
-        trains.remove(train);
+        fileStorage.removeTrain(train);
 
     }
 
     private void addWagon(Train train) {
-        train.addRollingComponent(new Wagon(train));
+        System.out.println(train.getName());
+        fileStorage.addRollingComponent(train, new Wagon(train.getName()));
+
     }
 
     private void delWagon(Train train) {
         if(train.getRollingComponents().size() > 0) {
             // @TODO: Doesn't seem like a perfect fix
-            train.getRollingComponents().remove(train.getRollingComponents().size() - 1);
+            fileStorage.removeRollingComponent(train);
+//            train.getRollingComponents().remove(train.getRollingComponents().size() - 1);
         }
     }
 
@@ -135,11 +137,16 @@ public class Controller implements Initializable {
     private void handleAction(ActionEvent event) {
 
         if(event.getSource() == choiceBox) {
-            selectedTrain = fileStorage.findTrainByName(trains, choiceBox.getValue().toString());
+            try {
+                selectedTrain = fileStorage.findTrainByName(choiceBox.getValue());
+            } catch(Exception err) {
+                // @TODO Looks like we ran in a NullPointerException because we are selecting a deleted train. Adjust this.
+            }
         }
 
         if(event.getSource() == btn_addtrain) {
             addTrain(txtf_trainname.getText().toLowerCase()); // name of train
+            trains = FXCollections.observableArrayList(fileStorage.reloadTrainList());
         }
         else if(event.getSource() == btn_addwagon) {
             addWagon(selectedTrain);
@@ -147,15 +154,12 @@ public class Controller implements Initializable {
 
         else if(event.getSource() == btn_deletewagon) {
             delWagon(selectedTrain);
+
         }
 
         else if(event.getSource() == btn_deletetrain) {
-            selectedTrain = trains.get(0);
-
-            System.out.println("test" + selectedTrain.getName());
-            System.out.println("test" + selectedTrain);
-
             delTrain(selectedTrain);
+            trains = FXCollections.observableArrayList(fileStorage.reloadTrainList());
         }
 
         else if(event.getSource() == btn_execute) {

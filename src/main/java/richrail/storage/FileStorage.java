@@ -14,8 +14,8 @@ import java.util.List;
 
 public class FileStorage implements Storage {
 
-    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    public ArrayList<Train> trainList = new ArrayList<>();
+    private Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter(RollingComponent.class, new InterfaceAdapter<RollingComponent>()).create();
+    private ArrayList<Train> trainList = new ArrayList<>();
 
     public FileStorage() {
 
@@ -23,11 +23,14 @@ public class FileStorage implements Storage {
 
     }
 
-    private void writeJsonToFile(String jsonString) {
-        try {
+    public ArrayList<Train> reloadTrainList() {
+        return this.loadAllTrains();
+    }
 
+    private void writeJsonToFile() {
+        try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("controller.json"));
-            writer.write(jsonString + "\n");
+            writer.write(gson.toJson(trainList) + "\n");
             writer.close();
 
         } catch (IOException err) {
@@ -36,12 +39,13 @@ public class FileStorage implements Storage {
     }
 
     @Override
-    public Train findTrainByName(ObservableList<Train> arrayList, String trainName) {
-        for(Train train : arrayList) {
-            if(train.getName().equals(trainName)) {
-                return train;
+    public Train findTrainByName(Object object) {
+        for (Train train : trainList) {
+             if (train.getName().equals(object.toString())) {
+                 System.out.println("HELLO!!!");
+                    return train;
+                }
             }
-        }
         return null;
     }
 
@@ -54,19 +58,40 @@ public class FileStorage implements Storage {
         Train train = new Train(name);
         trainList.add(train);
 
-        writeJsonToFile(gson.toJson(trainList));
+        writeJsonToFile();
 
         return null;
     }
 
     @Override
     public Train removeTrain(Train train) {
+        trainList.remove(findTrainByName(train)); // verwijder uit list
+        System.out.println(trainList);
+        writeJsonToFile(); // schrijf naar bestand
+
         return null;
     }
 
     @Override
-    public Train addRollingComponent(RollingComponent rollingComponent) {
-        return null;
+    public Train addRollingComponent(Train train, RollingComponent rollingComponent) {
+
+
+        train.addRollingComponent(rollingComponent);
+        System.out.println(trainList.get(1).getRollingComponents());
+        writeJsonToFile();
+
+
+
+        return train;
+    }
+
+    @Override
+    public Train removeRollingComponent(Train train) {
+        train.getRollingComponents().remove(train.getRollingComponents().size() - 1);
+        writeJsonToFile();
+
+        return train;
+
     }
 
     @Override
@@ -89,6 +114,8 @@ public class FileStorage implements Storage {
             reader.close();
 
         } catch (IOException err) {
+            // Seems like the json file does not exist. Let's create it. @TODO: Change this
+            this.writeJsonToFile();
             System.out.println("IOException: " + err.getMessage());
         }
 
