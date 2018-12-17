@@ -70,7 +70,7 @@ public class Controller implements Initializable {
     private Train selectedTrain;
 
     private FileStorage fileStorage = new FileStorage();
-    private ObservableList<Train> trains = FXCollections.observableArrayList(fileStorage.reloadTrainList());
+    private ObservableList<Train> trains = FXCollections.observableArrayList(fileStorage.loadAllTrains());
     private TrainCliService trainCliService = new TrainCliService();
 
     @Override
@@ -133,7 +133,7 @@ public class Controller implements Initializable {
 
         if(event.getSource() == btnAddTrain) {
             addTrain(textFieldTrainName.getText().toLowerCase()); // name of train
-            trains = FXCollections.observableArrayList(fileStorage.reloadTrainList());
+            trains = FXCollections.observableArrayList(fileStorage.loadAllTrains());
         }
         else if(event.getSource() == btnAddWagon) {
             fileStorage.addRollingComponent(selectedTrain, new Wagon("waggonnetje"));
@@ -151,7 +151,7 @@ public class Controller implements Initializable {
 
             fileStorage.removeTrain(selectedTrain);
 
-            trains = FXCollections.observableArrayList(fileStorage.reloadTrainList());
+            trains = FXCollections.observableArrayList(fileStorage.loadAllTrains());
 
         }
 

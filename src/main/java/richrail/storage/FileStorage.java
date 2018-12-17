@@ -23,14 +23,10 @@ public class FileStorage implements Storage {
 
     }
 
-    public ArrayList<Train> reloadTrainList() {
-        return this.loadAllTrains();
-    }
-
     private void writeJsonToFile() {
         try {
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter("controller.json"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("trainData.json"));
             writer.write(gson.toJson(trainList) + "\n");
             writer.close();
 
@@ -101,7 +97,7 @@ public class FileStorage implements Storage {
 
         try {
 
-            BufferedReader reader = new BufferedReader(new FileReader("controller.json"));
+            BufferedReader reader = new BufferedReader(new FileReader("trainData.json"));
             String jsonData = "";
             String line = reader.readLine();
 
