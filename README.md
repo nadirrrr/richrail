@@ -1,5 +1,5 @@
 # richrail
-Manage your train however you like. For the CLI, we have the following commands:
+Manage your train your way. For the CLI, we have the following commands:
 
 => new train tr1 - Creates Train "TR1".
 => new wagon tr1 - Adds a wagon to Train "TR1".
